@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    width: 300px;
+    margin: auto;
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+h2 {
+    color: #f8c102;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    background-color: #f8c102;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #e6b800;
+}
+
+a {
+    color: #f8c102;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Signup Form
+    const signupForm = document.getElementById("signupForm");
+    if (signupForm) {
+        signupForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (!validateEmail(email)) {
+                alert("Invalid email format. Please use a valid email.");
+                return;
+            }
+
+            // Store user info (simulating a database)
+            localStorage.setItem(email, JSON.stringify({ name, email, password }));
+            alert("Account created successfully!");
+            window.location.href = "login.html";
+        });
+    }
+
+    // Login Form
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            const user = JSON.parse(localStorage.getItem(email));
+
+            if (user && user.password === password) {
+                localStorage.setItem("currentUser", email);
+                alert("Login successful!");
+                window.location.href = "index.html";
+            } else {
+                alert("Invalid email or password!");
+            }
+        });
+    }
+});
+
+// Email validation function
+function validateEmail(email) {
+    const adminRegex = /^[a-zA-Z0-9._%+-]+@gmail\.admin\.com$/;
+    const devRegex = /^[a-zA-Z0-9._%+-]+@mu\.edu\.lb$/;
+    const userRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    return adminRegex.test(email) || devRegex.test(email) || userRegex.test(email);
+}
+
+    </script>
+</body>
+</html>

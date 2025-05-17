@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | SHUHADAONA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #E63946;
+            --primary-light: rgba(230, 57, 70, 0.1);
+            --secondary: #1D3557;
+            --accent: #F8C102;
+            --dark: #121212;
+            --dark-light: #1E1E1E;
+            --light: #FFFFFF;
+            --gray: #757575;
+            --light-gray: #E0E0E0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            transition: var(--transition);
+            min-height: 100vh;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.7;
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--secondary);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        body.light-mode nav {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--light);
+            transition: var(--transition);
+        }
+
+        body.light-mode .nav-title {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        body.light-mode nav a {
+            color: var(--secondary);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        body.light-mode nav a:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        nav button {
+            background-color: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        nav button:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Video Section */
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+
+        /* Content Section */
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .content-section h2 {
+            color: var(--accent);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Mission Statement */
+        .mission {
+            background-color: var(--primary-light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .mission h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p,
+            .content-section p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            nav button {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* RTL Support */
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <span class="nav-title">ABOUT US</span>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> BACK</a>
+            <button onclick="toggleLanguage()">
+                <i class="fas fa-language"></i>
+                <span id="languageText">العربية</span>
+            </button>
+            <button onclick="toggleMode()">
+                <i class="fas fa-moon"></i>
+                <span id="themeText">Light</span>
+            </button>
+            <button onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span id="logoutText">Logout</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 id="heroTitle">Honoring Our Martyrs</h1>
+            <p id="heroSubtitle">Preserving the legacy of those who sacrificed for our future</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-container">
+            <video autoplay loop muted playsinline>
+                <source src="video sayed.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section" id="content">
+            <h2 id="sectionTitle">Our Mission</h2>
+            <div class="mission">
+                <h3 id="missionTitle">Why We Remember</h3>
+                <p id="missionText">
+                    In each and every country around the world that had wars and even organizations, 
+                    all prioritize remembering their fallen heroes with memorial days and stones 
+                    sculpted with their names. These memorials pay tribute to the bravery and 
+                    sacrifices of soldiers, ensuring their stories are never forgotten.
+                </p>
+            </div>
+
+            <p id="contentText1">
+                Memorials help preserve history by providing future generations with a tangible 
+                connection to the past. They remind us of the events and people that shaped our 
+                nation. The memorials of our fallen martyrs will eternally educate about what they 
+                fought for, the righteous causes they stood for against evil and inhumanity. They 
+                are the compass guiding people through the roughest seas during their darkest hours.
+            </p>
+
+            <h2 id="sectionTitle2">The Challenge</h2>
+            <p id="contentText2">
+                The number of martyrs and casualties in war can reach hundreds of thousands or even 
+                millions, creating a significant challenge in preserving their data. In our digital 
+                age, a simple stone slab with names and dates is no longer sufficient. Each new 
+                generation needs real heroes with stories and impacts on society that they can 
+                connect with.
+            </p>
+
+            <h2 id="sectionTitle3">Our Solution</h2>
+            <p id="contentText3">
+                Our website serves as a digital memorial, hosting comprehensive data about our 
+                martyrs - their stories, good deeds, origins, and the causes they fought for. 
+                It includes martyrs from different wars in our beloved Jabal Aamel. The platform 
+                also enables supporters to send anonymous donations to martyrs' families through 
+                their profiles, ensuring their sacrifice continues to be honored through support 
+                for their loved ones.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                navTitle: "ABOUT US",
+                back: "BACK",
+                language: "العربية",
+                theme: "Light",
+                logout: "Logout",
+                heroTitle: "Honoring Our Martyrs",
+                heroSubtitle: "Preserving the legacy of those who sacrificed for our future",
+                sectionTitle: "Our Mission",
+                missionTitle: "Why We Remember",
+                missionText: "In each and every country around the world that had wars and even organizations, all prioritize remembering their fallen heroes with memorial days and stones sculpted with their names. These memorials pay tribute to the bravery and sacrifices of soldiers, ensuring their stories are never forgotten.",
+                contentText1: "Memorials help preserve history by providing future generations with a tangible connection to the past. They remind us of the events and people that shaped our nation. The memorials of our fallen martyrs will eternally educate about what they fought for, the righteous causes they stood for against evil and inhumanity. They are the compass guiding people through the roughest seas during their darkest hours.",
+                sectionTitle2: "The Challenge",
+                contentText2: "The number of martyrs and casualties in war can reach hundreds of thousands or even millions, creating a significant challenge in preserving their data. In our digital age, a simple stone slab with names and dates is no longer sufficient. Each new generation needs real heroes with stories and impacts on society that they can connect with.",
+                sectionTitle3: "Our Solution",
+                contentText3: "Our website serves as a digital memorial, hosting comprehensive data about our martyrs - their stories, good deeds, origins, and the causes they fought for. It includes martyrs from different wars in our beloved Jabal Aamel. The platform also enables supporters to send anonymous donations to martyrs' families through their profiles, ensuring their sacrifice continues to be honored through support for their loved ones."
+            },
+            ar: {
+                navTitle: "معلومات عنا",
+                back: "رجوع",
+                language: "English",
+                theme: "داكن",
+                logout: "تسجيل خروج",
+                heroTitle: "تكريم شهدائنا",
+                heroSubtitle: "الحفاظ على إرث من ضحوا من أجل مستقبلنا",
+                sectionTitle: "مهمتنا",
+                missionTitle: "لماذا نتذكر",
+                missionText: "في كل بلد حول العالم شهد حروبا وحتى منظمات، أعطى الجميع الأولوية لتذكر أبطالهم الذين سقطوا بأيام الذكرى والأحجار المنحوتة بأسمائهم. يتم عمل هذه النصب التذكارية لتكريم شجاعة وتضحيات الجنود وضمان عدم نسيان قصصهم.",
+                contentText1: "تساعد النصب التذكارية في الحفاظ على التاريخ من خلال تزويد الأجيال القادمة باتصال ملموس بالماضي. إنها تذكرنا بالأحداث والأشخاص الذين شكلوا أمتنا. ستعلم النصب التذكارية لشهدائنا الذين سقطوا إلى الأبد ما ناضلوا من أجله، والأسباب العادلة التي وقفوا من أجلها ضد الشر واللاإنسانية. إنهم البوصلة التي ترشد الناس عبر أقسى البحار في أحلك ساعاتهم.",
+                sectionTitle2: "التحدي",
+                contentText2: "يمكن أن يصل عدد الشهداء والضحايا في الحرب إلى مئات الآلاف أو حتى الملايين، مما يشكل تحديا كبيرا في الحفاظ على بياناتهم. في عصرنا الرقمي، لم يعد لوح حجري بسيط يحمل أسماء وتواريخ كافيا. يحتاج كل جيل جديد إلى أبطال حقيقيين لديهم قصص وتأثيرات على المجتمع يمكنهم التواصل معها.",
+                sectionTitle3: "حلنا",
+                contentText3: "يعمل موقعنا كنصب تذكاري رقمي، يستضيف بيانات شاملة عن شهدائنا - قصصهم، وأعمالهم الصالحة، وأصولهم، والأسباب التي ناضلوا من أجلها. ويشمل شهداء من حروب مختلفة في حبيبنا جبل عامل. تمكن المنصة أيضا المؤيدين من إرسال تبرعات مجهولة المصدر إلى عائلات الشهداء من خلال ملفاتهم الشخصية، مما يضمن استمرار تكريم تضحيتهم من خلال الدعم لأحبائهم."
+            }
+        };
+
+        // Current language state
+        let currentLanguage = 'en';
+        let isDarkMode = true;
+
+        // Initialize page
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+            updateUI();
+        });
+
+        // Theme management
+        function loadTheme() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "light") {
+                document.body.classList.add("light-mode");
+                isDarkMode = false;
+                document.getElementById("themeText").textContent = "Dark";
+            }
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("light-mode");
+            isDarkMode = !isDarkMode;
+            
+            if (isDarkMode) {
+                localStorage.setItem("theme", "dark");
+                document.getElementById("themeText").textContent = translations[currentLanguage].theme;
+            } else {
+                localStorage.setItem("theme", "light");
+                document.getElementById("themeText").textContent = translations[currentLanguage].theme;
+            }
+        }
+
+        // Language toggle
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+            updateUI();
+        }
+
+        // Update all UI elements with current language
+        function updateUI() {
+            const lang = translations[currentLanguage];
+            
+            // Update navigation
+            document.querySelector(".nav-title").textContent = lang.navTitle;
+            document.querySelector("nav a").innerHTML = `<i class="fas fa-arrow-left"></i> ${lang.back}`;
+            document.getElementById("languageText").textContent = lang.language;
+            document.getElementById("themeText").textContent = lang.theme;
+            document.getElementById("logoutText").textContent = lang.logout;
+            
+            // Update content
+            document.getElementById("heroTitle").textContent = lang.heroTitle;
+            document.getElementById("heroSubtitle").textContent = lang.heroSubtitle;
+            document.getElementById("sectionTitle").textContent = lang.sectionTitle;
+            document.getElementById("missionTitle").textContent = lang.missionTitle;
+            document.getElementById("missionText").textContent = lang.missionText;
+            document.getElementById("contentText1").textContent = lang.contentText1;
+            document.getElementById("sectionTitle2").textContent = lang.sectionTitle2;
+            document.getElementById("contentText2").textContent = lang.contentText2;
+            document.getElementById("sectionTitle3").textContent = lang.sectionTitle3;
+            document.getElementById("contentText3").textContent = lang.contentText3;
+            
+            // Update text direction
+            const content = document.getElementById("content");
+            if (currentLanguage === 'ar') {
+                content.classList.add("rtl");
+            } else {
+                content.classList.remove("rtl");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("currentUser");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
