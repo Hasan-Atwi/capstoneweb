@@ -1,4 +1,5 @@
 # Frontend ignores (general)
+# test
 frontend/node_modules/
 frontend/.env
 frontend/*.log
