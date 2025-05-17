@@ -1,0 +1,17 @@
+# Frontend ignores (general)
+frontend/node_modules/
+frontend/.env
+frontend/*.log
+frontend/dist/
+
+# Laravel ignores (mirrors backend/.gitignore but prefixed)
+backend/vendor/
+backend/.env
+backend/storage/*.key
+backend/public/storage
+backend/composer.lock
+
+# System files
+.DS_Store
+.idea/
+Thumbs.db
