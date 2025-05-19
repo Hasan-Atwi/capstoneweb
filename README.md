@@ -5,6 +5,17 @@
 
 
 ```mermaid
+
+erDiagram
+    users ||--o{ memorials : creates
+    users ||--o{ tributes : writes
+    memorials ||--o{ photos : contains
+    memorials ||--o{ events : has
+    memorials ||--o{ donations : receives
+    memorials ||--o{ memorial_tribute : has
+    tributes ||--o{ memorial_tribute : belongs_to
+
+
 -- 1. Create users table (for admins/family)
 CREATE TABLE user (
     id INT AUTO_INCREMENT PRIMARY KEY,
