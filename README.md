@@ -47,7 +47,7 @@ erDiagram
         int tribute_id PK,FK
     }
 
-    photos {
+    Photos_Videos {
         int id PK
         string image_path
         text caption
@@ -115,15 +115,17 @@ FOREIGN KEY (memorial_id) REFERENCES memorials(id) ON DELETE CASCADE,
 FOREIGN KEY (tribute_id) REFERENCES tributes(id) ON DELETE CASCADE
 );
 
--- 5. Create photos table (memorial galleries)
-CREATE TABLE photos (
+-- 5. Create photos_videos table 
+(memorial galleries)CREATE TABLE Photos_Videos (
 id INT AUTO_INCREMENT PRIMARY KEY,
-image_path VARCHAR(255) NOT NULL,
+image_path VARCHAR(255),
+video_path VARCHAR(255),
 caption TEXT,
 memorial_id INT NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (memorial_id) REFERENCES memorials(id) ON DELETE CASCADE
 );
+
 
 -- 6. Create events table (funeral/memorial events)
 CREATE TABLE events (
