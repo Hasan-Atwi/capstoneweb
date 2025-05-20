@@ -50,49 +50,50 @@ erDiagram
 
     # MYSQL code:
 
-    users {
-        int id PK
-        string name
-        string email
-        string password
-        timestamp created_at
-    }
+users {
+int id
+string name
+string email
+}
 
     memorials {
-        int id PK
+        int id
         string name
         date birth_date
-        date death_date
-        text biography
-        string cover_image
-        int user_id FK
-        timestamp created_at
+        int user_id
     }
 
     photos_videos {
-        int id PK
+        int id
         string media_path
-        text caption
-        string type "photo/video"
-        int memorial_id FK "nullable"
-        int event_id FK "nullable"
-        timestamp created_at
+        int memorial_id
+        int event_id
     }
 
     events {
-        int id PK
+        int id
         string title
-        datetime event_date
-        text location
-        int memorial_id FK
-        int user_id FK
+        int memorial_id
+        int user_id
     }
 
     donations {
-        int id PK
+        int id
         decimal amount
+        int memorial_id
+        int user_id
         string donor_name
-        int memorial_id FK
-        timestamp created_at
     }
 
+### Database Constraints
+- **Foreign Keys**:
+    - `donations.user_id` → `users.id`
+    - `donations.memorial_id` → `memorials.id`
+    - `events.user_id` → `users.id`
+    - `photos_videos.memorial_id` → `memorials.id`
+    - `photos_videos.event_id` → `events.id`
+
+- **Indexes**:
+    - `idx_donations_user_id` (`donations.user_id`)
+    - `idx_photos_memorial` (`photos_videos.memorial_id`)
+    - `idx_events_user` (`events.user_id`)
