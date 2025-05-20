@@ -35,9 +35,9 @@ erDiagram
         int id PK
         string media_path
         text caption
-        string type "photo|video"
-        int memorial_id FK "nullable"
-        int event_id FK "nullable"
+        string type
+        int memorial_id FK
+        int event_id FK
         timestamp created_at
     }
 
