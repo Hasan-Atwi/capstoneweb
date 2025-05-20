@@ -2,15 +2,15 @@
 
 # The ER diagram:
 
-
 ```mermaid
 erDiagram
-    users ||--o{ memorials : "creates"
-    users ||--o{ events : "creates"
-    memorials ||--o{ photos_videos : "person_media"
-    events ||--o{ photos_videos : "event_media"
-    memorials ||--o{ events : "hosts"
-    memorials ||--o{ donations : "receives"
+users ||--o{ memorials : "creates"
+users ||--o{ events : "creates"
+users ||--o{ donations : "makes"
+memorials ||--o{ photos_videos : "person_media"
+events ||--o{ photos_videos : "event_media"
+memorials ||--o{ events : "hosts"
+memorials ||--o{ donations : "receives"
 
     users {
         int id PK
@@ -27,7 +27,7 @@ erDiagram
         date death_date
         text biography
         string cover_image
-        int user_id FK
+        int user_id FK "CASCADE"
         timestamp created_at
     }
 
@@ -35,10 +35,12 @@ erDiagram
         int id PK
         string media_path
         text caption
-        string type
-        int memorial_id FK
-        int event_id FK
+        enum type "photo|video"
+        int memorial_id FK "NULL,CASCADE"
+        int event_id FK "NULL,CASCADE"
         timestamp created_at
+        index idx_memorial_id
+        index idx_event_id
     }
 
     events {
@@ -46,17 +48,21 @@ erDiagram
         string title
         datetime event_date
         text location
-        int memorial_id FK
-        int user_id FK
+        int memorial_id FK "CASCADE"
+        int user_id FK "CASCADE"
+        index idx_user_id
     }
 
     donations {
         int id PK
         decimal amount
         string donor_name
-        int memorial_id FK
+        int memorial_id FK "CASCADE"
+        int user_id FK "CASCADE"
         timestamp created_at
+        index idx_memorial_id
     }```
+
 
     # MYSQL code:
 
