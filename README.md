@@ -4,13 +4,13 @@
 
 ```mermaid
 erDiagram
-users ||--o{ memorials : "creates"
-users ||--o{ events : "creates"
-users ||--o{ donations : "makes"
-memorials ||--o{ photos_videos : "person_media"
-events ||--o{ photos_videos : "event_media"
-memorials ||--o{ events : "hosts"
-memorials ||--o{ donations : "receives"
+    users ||--o{ memorials : "creates"
+    users ||--o{ events : "creates"
+    users ||--o{ donations : "makes"
+    memorials ||--o{ photos_videos : "person_media"
+    events ||--o{ photos_videos : "event_media"
+    memorials ||--o{ events : "hosts"
+    memorials ||--o{ donations : "receives"
 
     users {
         int id PK
@@ -39,8 +39,7 @@ memorials ||--o{ donations : "receives"
         int memorial_id FK "NULL,CASCADE"
         int event_id FK "NULL,CASCADE"
         timestamp created_at
-        index idx_memorial_id
-        index idx_event_id
+        note for photos_videos "Indexes: idx_memorial_id, idx_event_id"
     }
 
     events {
@@ -50,7 +49,7 @@ memorials ||--o{ donations : "receives"
         text location
         int memorial_id FK "CASCADE"
         int user_id FK "CASCADE"
-        index idx_user_id
+        note for events "Index: idx_user_id"
     }
 
     donations {
@@ -60,9 +59,9 @@ memorials ||--o{ donations : "receives"
         int memorial_id FK "CASCADE"
         int user_id FK "CASCADE"
         timestamp created_at
-        index idx_memorial_id
-    }```
-
+        note for donations "Index: idx_memorial_id"
+    }
+```
 
     # MYSQL code:
 
