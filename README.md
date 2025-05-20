@@ -13,53 +13,38 @@ erDiagram
     memorials ||--o{ donations : "receives"
 
     users {
-        int id PK
+        int id
         string name
         string email
-        string password
-        timestamp created_at
     }
 
     memorials {
-        int id PK
+        int id
         string name
         date birth_date
-        date death_date
-        text biography
-        string cover_image
-        int user_id FK "CASCADE"
-        timestamp created_at
+        int user_id
     }
 
     photos_videos {
-        int id PK
+        int id
         string media_path
-        text caption
-        enum type "photo|video"
-        int memorial_id FK "NULL,CASCADE"
-        int event_id FK "NULL,CASCADE"
-        timestamp created_at
-        note for photos_videos "Indexes: idx_memorial_id, idx_event_id"
+        int memorial_id
+        int event_id
     }
 
     events {
-        int id PK
+        int id
         string title
-        datetime event_date
-        text location
-        int memorial_id FK "CASCADE"
-        int user_id FK "CASCADE"
-        note for events "Index: idx_user_id"
+        int memorial_id
+        int user_id
     }
 
     donations {
-        int id PK
+        int id
         decimal amount
+        int memorial_id
+        int user_id
         string donor_name
-        int memorial_id FK "CASCADE"
-        int user_id FK "CASCADE"
-        timestamp created_at
-        note for donations "Index: idx_memorial_id"
     }
 ```
 
