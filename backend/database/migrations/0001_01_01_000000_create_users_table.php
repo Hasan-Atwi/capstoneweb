@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password'); // Will store hashed passwords
-            $table->rememberToken(); // Crucial for "remember me" functionality
-            $table->timestamps(); // Adds both created_at AND updated_at
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('phone', 20)->nullable();
+            $table->rememberToken();
+            $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
