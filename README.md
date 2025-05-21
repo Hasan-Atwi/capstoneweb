@@ -5,86 +5,198 @@
 ```mermaid
 erDiagram
     users ||--o{ memorials : "creates"
-    users ||--o{ events : "creates"
-    users ||--o{ donations : "makes"
-    memorials ||--o{ photos_videos : "person_media"
-    events ||--o{ photos_videos : "event_media"
+    users ||--o{ tributes : "writes"
+    users ||--o{ orders : "places"
+    memorials ||--o{ photos_videos : "has"
     memorials ||--o{ events : "hosts"
     memorials ||--o{ donations : "receives"
+    memorials ||--o{ memorial_shop_items : "features"
+    shop_items ||--o{ memorial_shop_items : "linked_to"
+    shop_items ||--o{ order_items : "ordered_as"
+    orders ||--o{ order_items : "contains"
+    events ||--o{ photos_videos : "event_media"
 
     users {
-        int id
+        int id PK
         string name
         string email
         string password
+        string remember_token
+        timestamp created_at
+        timestamp updated_at
     }
 
     memorials {
-        int id
+        int id PK
         string name
         date birth_date
-        int user_id
+        date death_date
+        text biography
+        string cover_image
+        int user_id FK "CASCADE"
     }
 
     photos_videos {
-        int id
+        int id PK
         string media_path
-        int memorial_id
-        int event_id
+        string type "photo|video"
+        text caption
+        int memorial_id FK "nullable"
+        int event_id FK "nullable"
     }
 
     events {
-        int id
+        int id PK
         string title
-        int memorial_id
-        int user_id
+        datetime event_date
+        text location
+        int memorial_id FK "CASCADE"
+        int user_id FK "CASCADE"
+    }
+
+    tributes {
+        int id PK
+        text content
+        string author_name
+        int user_id FK "nullable"
+        int memorial_id FK "CASCADE"
     }
 
     donations {
-        int id
+        int id PK
         decimal amount
-        int memorial_id
-        int user_id
         string donor_name
+        int memorial_id FK "CASCADE"
+        int user_id FK "CASCADE"
+    }
+
+    shop_items {
+        int id PK
+        string name
+        string type "book|artwork|digital|other"
+        decimal price
+        string image_url
+        text description
+        text deceased_connection
+    }
+
+    memorial_shop_items {
+        int id PK
+        int memorial_id FK "CASCADE"
+        int shop_item_id FK "CASCADE"
+        string personal_note
+        int display_order
+    }
+
+    orders {
+        int id PK
+        int user_id FK
+        string delivery_address
+        string contact_phone
+        decimal total
+        string status "pending|confirmed|shipped|delivered|cancelled"
+        timestamp created_at
+    }
+
+    order_items {
+        int id PK
+        int order_id FK "CASCADE"
+        int shop_item_id FK "CASCADE"
+        int quantity
+        decimal unit_price
     }
 ```
 
     # MYSQL code:
 
-users {
-int id
-string name
-string email
-sting password
-}
+    users {
+        int id PK
+        string name
+        string email
+        string password
+        string remember_token
+        timestamp created_at
+        timestamp updated_at
+    }
 
     memorials {
-        int id
+        int id PK
         string name
         date birth_date
-        int user_id
+        date death_date
+        text biography
+        string cover_image
+        int user_id FK "CASCADE"
     }
 
     photos_videos {
-        int id
+        int id PK
         string media_path
-        int memorial_id
-        int event_id
+        string type "photo|video"
+        text caption
+        int memorial_id FK "nullable"
+        int event_id FK "nullable"
     }
 
     events {
-        int id
+        int id PK
         string title
-        int memorial_id
-        int user_id
+        datetime event_date
+        text location
+        int memorial_id FK "CASCADE"
+        int user_id FK "CASCADE"
+    }
+
+    tributes {
+        int id PK
+        text content
+        string author_name
+        int user_id FK "nullable"
+        int memorial_id FK "CASCADE"
     }
 
     donations {
-        int id
+        int id PK
         decimal amount
-        int memorial_id
-        int user_id
         string donor_name
+        int memorial_id FK "CASCADE"
+        int user_id FK "CASCADE"
+    }
+
+    shop_items {
+        int id PK
+        string name
+        string type "book|artwork|digital|other"
+        decimal price
+        string image_url
+        text description
+        text deceased_connection
+    }
+
+    memorial_shop_items {
+        int id PK
+        int memorial_id FK "CASCADE"
+        int shop_item_id FK "CASCADE"
+        string personal_note
+        int display_order
+    }
+
+    orders {
+        int id PK
+        int user_id FK
+        string delivery_address
+        string contact_phone
+        decimal total
+        string status "pending|confirmed|shipped|delivered|cancelled"
+        timestamp created_at
+    }
+
+    order_items {
+        int id PK
+        int order_id FK "CASCADE"
+        int shop_item_id FK "CASCADE"
+        int quantity
+        decimal unit_price
     }
 
 ### Database Constraints
