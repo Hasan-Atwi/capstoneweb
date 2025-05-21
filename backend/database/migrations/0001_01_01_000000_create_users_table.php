@@ -15,12 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamp('created_at')->useCurrent();
+            $table->string('password'); // Will store hashed passwords
+            $table->rememberToken(); // Crucial for "remember me" functionality
+            $table->timestamps(); // Adds both created_at AND updated_at
         });
-
-
-
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -37,7 +35,6 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
-
     /**
      * Reverse the migrations.
      */
