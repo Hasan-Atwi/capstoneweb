@@ -55,6 +55,7 @@ users {
 int id
 string name
 string email
+sting password
 }
 
     memorials {
