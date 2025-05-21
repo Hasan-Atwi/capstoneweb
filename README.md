@@ -16,6 +16,7 @@ erDiagram
         int id
         string name
         string email
+        string password
     }
 
     memorials {
